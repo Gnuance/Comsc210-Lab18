@@ -37,9 +37,11 @@ public:
     void setYearReleased(int yr);
     int getYearReleased();
     void addReview(string headOrTail);
-    void deleteReviewByIndex(int); // Deletes Movie review at given index
-    void deleteAllReviews();       // Loops through all Movie reviews and deletes
+    review getReview(int);   // Returns a review at given index
+    void deleteReview(int);  // Deletes Movie review at given index
+    void deleteAllReviews(); // Loops through all Movie reviews and deletes
     int getNumReviews();
+    bool isReview(int);          // Checks if review at given index is valid
     string reviewsToString(int); // Returns string containing given number of reviews, 0 for all
     ~Movie();                    // Deletes object, as well as all associated Movie reviews
 };
@@ -112,24 +114,40 @@ Movie::Movie(string n, int yrReleased)
     setName(n);
     setYearReleased(yrReleased);
 }
-void Movie::setName(string n){
+void Movie::setName(string n)
+{
     name = n;
 }
-string Movie::getName(){
+string Movie::getName()
+{
     return name;
 }
-void Movie::setYearReleased(int yr){
-    if (yr < 1887) throw invalid_argument("Must be a valid year > 1887.");
+void Movie::setYearReleased(int yr)
+{
+    if (yr < 1887)
+        throw invalid_argument("Must be a valid year > 1887.");
     yearReleased = yr;
 }
-int Movie::getYearReleased(){
+int Movie::getYearReleased()
+{
     return yearReleased;
 }
-void Movie::addReview(string headOrTail);
+void Movie::addReview(string headOrTail)
+{
+}
+// Returns a review at given index
+review Movie::getReview(int index)
+{
+}
 void Movie::deleteReviewByIndex(int); // Deletes Movie review at given index
 void Movie::deleteAllReviews();       // Loops through all Movie reviews and deletes
-int Movie::getNumReviews() {
+int Movie::getNumReviews()
+{
     return reviewCount;
+}
+// Checks if review at given index is valid
+bool isReview(int)
+{
 }
 string Movie::reviewsToString(int); // Returns string containing given number of reviews, 0 for all
 Movie::~Movie()
