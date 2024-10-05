@@ -150,11 +150,15 @@ void Movie::addReview(review r, string headOrTail)
     {
         tail->next = &r;
         tail = &r;
-    }        
+    } else {
+        return; // Return without performing any operation if no condition matches
+    }
+    reviewCount++;
 }
 // Returns a review at given index
 review Movie::getReview(int index)
 {
+
 }
 void Movie::deleteReviewByIndex(int); // Deletes Movie review at given index
 void Movie::deleteAllReviews();       // Loops through all Movie reviews and deletes
