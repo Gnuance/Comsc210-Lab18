@@ -37,7 +37,7 @@ public:
     void setYearReleased(int yr);
     int getYearReleased();
     void addReview(review, string);
-    review getReview(int);   // Returns a review at given index
+    string getReview(int);   // Returns a review at given index
     void deleteReview(int);  // Deletes Movie review at given index
     void deleteAllReviews(); // Loops through all Movie reviews and deletes
     int getNumReviews();
@@ -156,9 +156,21 @@ void Movie::addReview(review r, string headOrTail)
     reviewCount++;
 }
 // Returns a review at given index
-review Movie::getReview(int index)
+string Movie::getReview(int index)
 {
+    // Check to make sure index in in range
+    if (!isReview(index)) throw invalid_argument("Review not found at index: " + index);
 
+    // Set current pointer equal to review object
+    review* current = head;
+    for (size_t i = 0; i <= index && current; i++)
+    {
+        current->next;
+    }
+
+    // Check to make sure current object is valid
+    if (current) return string("");
+    
 }
 void Movie::deleteReviewByIndex(int); // Deletes Movie review at given index
 void Movie::deleteAllReviews();       // Loops through all Movie reviews and deletes
