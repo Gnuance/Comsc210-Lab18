@@ -136,11 +136,21 @@ int Movie::getYearReleased()
 }
 void Movie::addReview(review r, string headOrTail)
 {
+    // If head and tail are null, initialize list
     if (!head && !tail)
     {
-        /* code */
+        head = tail = &r;
+    } 
+    else if (headOrTail == "head") // Place new node at head
+    {
+        r.next = head->next;
+        head = &r;
     }
-    
+    else if (headOrTail == "tail") // Place new node at tail
+    {
+        tail->next = &r;
+        tail = &r;
+    }        
 }
 // Returns a review at given index
 review Movie::getReview(int index)
