@@ -106,12 +106,12 @@ int main()
 
 // Movie CLASS DEFINITIONS
 Movie::Movie()
-: reviewCount(0), head(nullptr), tail(nullptr)
+    : reviewCount(0), head(nullptr), tail(nullptr)
 {
 }
 
 Movie::Movie(string n, int yrReleased)
-: reviewCount(0), head(nullptr), tail(nullptr)
+    : reviewCount(0), head(nullptr), tail(nullptr)
 {
     setName(n);
     setYearReleased(yrReleased);
@@ -127,7 +127,7 @@ string Movie::getName()
 void Movie::setYearReleased(int yr)
 {
     if (yr < 1887)
-        throw invalid_argument("Must be a valid year > 1887.");
+        throw invalid_argument("Must be a valid year >= 1888 (the first movie).");
     yearReleased = yr;
 }
 int Movie::getYearReleased()
@@ -141,7 +141,7 @@ void Movie::addReview(review r, string headOrTail)
     {
         head = tail = &r;
         tail->next = nullptr;
-    } 
+    }
     else if (headOrTail == "head") // Place new node at head
     {
         r.next = head->next;
@@ -152,7 +152,9 @@ void Movie::addReview(review r, string headOrTail)
         tail->next = &r;
         tail = &r;
         tail->next = nullptr;
-    } else {
+    }
+    else
+    {
         return; // Return without performing any operation if no condition matches
     }
     reviewCount++;
@@ -161,37 +163,42 @@ void Movie::addReview(review r, string headOrTail)
 string Movie::getReview(int index)
 {
     // Check to make sure index in in range
-    if (!isReview(index)) throw invalid_argument("Review not found at index: " + index);
+    if (!isReview(index))
+        throw invalid_argument("Review not found at index: " + index);
 
     // Set current pointer equal to review object
-    review* current = head;
+    review *current = head;
     for (size_t i = 0; i <= index && current; i++)
     {
         current->next;
     }
 
     // Check to make sure current object is valid
-    if (current) return string(to_string(current->rating) + ": " + current->comment);
-    
+    if (current)
+        return string(to_string(current->rating) + ": " + current->comment);
 }
 // Deletes Movie review at given index
-void Movie::deleteReview(int index){
+void Movie::deleteReview(int index)
+{
     // Make sure index is valid
-    if (!isReview) throw invalid_argument("No reviews exist for this movie.");
+    if (!isReview)
+        throw invalid_argument("No reviews exist for this movie.");
 
     // Now that index is valid find review, reroute next pointer, and delete
     // Set current pointer = to review to be deleted
-    review * current = head;
+    review *current = head;
     review *prev = head;
     for (size_t i = 0; i < index; i++)
     {
         if (i == 0)
         {
             current = current->next;
-        }else {
+        }
+        else
+        {
             current = current->next;
             prev = prev->next;
-        }  
+        }
     }
     // If current is head, point head to next element and delete current
     // If current is tail, point tail to prev element and delete current
@@ -200,17 +207,30 @@ void Movie::deleteReview(int index){
     {
         head = head->next;
         delete current;
-    } else if (/* condition */)
-    {
-        /* code */
     }
-    
-    
-    
-    
-    
+    else if (current == tail)
+    {
+        tail = prev;
+        delete current;
+        tail->next = nullptr;
+    }
+    else
+    {
+        prev->next = current->next;
+        delete current;
+    }
 }
-void Movie::deleteAllReviews();       // Loops through all Movie reviews and deletes
+
+// Loops through all Movie reviews and deletes
+void Movie::deleteAllReviews()
+{
+    // Set current = head and continue looping and deleting until current == nullptr
+    review *current = head;
+    while (current)
+    {
+        
+    }    
+}
 int Movie::getNumReviews()
 {
     return reviewCount;
@@ -218,7 +238,8 @@ int Movie::getNumReviews()
 // Checks if review at given index is valid
 bool Movie::isReview(int index)
 {
-    if (index >= 0 && reviewCount > 0 && index <= reviewCount) return true;
+    if (index >= 0 && reviewCount > 0 && index <= reviewCount)
+        return true;
     return false;
 }
 
