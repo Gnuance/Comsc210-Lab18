@@ -17,7 +17,7 @@ class Movie
 {
 private:
     string name;
-    string yearReleased;
+    int yearReleased;
     // Linked list struct to hold Movie reviews
     struct review
     {
@@ -27,16 +27,21 @@ private:
     };
     review* head;
     review* tail;
+    int reviewCount = 0;
 
 public:
     Movie();
+    Movie(int, int);
     void setName(string n);
     string getName();
     void setYearReleased(string yr);
-    string getYearReleased();
+    int getYearReleased();
     void addReview(string headOrTail);
+    void deleteReviewByIndex(int); // Deletes Movie review at given index
+    void deleteAllReviews(); // Loops through all Movie reviews and deletes
     int getNumReviews();
-    ~Movie();
+    string reviewsToString(int); // Returns string containing given number of reviews, 0 for all
+    ~Movie(); // Deletes object, as well as all associated Movie reviews
 };
 
 // Function declarations
@@ -98,13 +103,24 @@ int main()
 }
 
 // Movie object definitions
-Movie::Movie(/* args */)
+Movie::Movie()
 {
 }
 
 Movie::~Movie()
 {
 }
+
+Movie::Movie(int, int);
+    void setName(string n);
+    string getName();
+    void setYearReleased(string yr);
+    int getYearReleased();
+    void addReview(string headOrTail);
+    void deleteReviewByIndex(int); // Deletes Movie review at given index
+    void deleteAllReviews(); // Loops through all Movie reviews and deletes
+    int getNumReviews();
+    string reviewsToString(int); // Returns string containing given number of reviews, 0 for all
 
 // Creates a linked list of size SIZE with random integers
 void createRandomList(Node *&head, const int SIZE)
