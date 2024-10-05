@@ -36,7 +36,7 @@ public:
     string getName();
     void setYearReleased(int yr);
     int getYearReleased();
-    void addReview(string headOrTail);
+    void addReview(review, string);
     review getReview(int);   // Returns a review at given index
     void deleteReview(int);  // Deletes Movie review at given index
     void deleteAllReviews(); // Loops through all Movie reviews and deletes
@@ -134,9 +134,13 @@ int Movie::getYearReleased()
 {
     return yearReleased;
 }
-void Movie::addReview(string headOrTail)
+void Movie::addReview(review r, string headOrTail)
 {
-
+    if (!head && !tail)
+    {
+        /* code */
+    }
+    
 }
 // Returns a review at given index
 review Movie::getReview(int index)
