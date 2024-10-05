@@ -146,8 +146,9 @@ int Movie::getNumReviews()
     return reviewCount;
 }
 // Checks if review at given index is valid
-bool isReview(int)
+bool isReview(int index)
 {
+    if (index >= 0 && index )
 }
 string Movie::reviewsToString(int); // Returns string containing given number of reviews, 0 for all
 Movie::~Movie()
