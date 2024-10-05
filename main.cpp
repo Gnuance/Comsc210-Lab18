@@ -140,6 +140,7 @@ void Movie::addReview(review r, string headOrTail)
     if (!head && !tail)
     {
         head = tail = &r;
+        tail->next = nullptr;
     } 
     else if (headOrTail == "head") // Place new node at head
     {
@@ -150,6 +151,7 @@ void Movie::addReview(review r, string headOrTail)
     {
         tail->next = &r;
         tail = &r;
+        tail->next = nullptr;
     } else {
         return; // Return without performing any operation if no condition matches
     }
@@ -180,12 +182,30 @@ void Movie::deleteReview(int index){
     // Now that index is valid find review, reroute next pointer, and delete
     // Set current pointer = to review to be deleted
     review * current = head;
+    review *prev = head;
     for (size_t i = 0; i < index; i++)
     {
-        current = current->next;
+        if (i == 0)
+        {
+            current = current->next;
+        }else {
+            current = current->next;
+            prev = prev->next;
+        }  
+    }
+    // If current is head, point head to next element and delete current
+    // If current is tail, point tail to prev element and delete current
+    // Else, point prev = current->next, and delete current
+    if (current == head)
+    {
+        head = head->next;
+        delete current;
+    } else if (/* condition */)
+    {
+        /* code */
     }
     
-    // If index is head, point head to next element and delete current
+    
     
     
     
