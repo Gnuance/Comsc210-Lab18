@@ -12,11 +12,30 @@
 #include <iostream>
 using namespace std;
 
-// Linked list node struct
-struct Node
+// Movie object file declaration to hold info on movie and list of reviews
+class Movie
 {
-    float value;
-    Node *next;
+private:
+    string name;
+    string yearReleased;
+    // Linked list node struct
+    struct review
+    {
+        double rating;
+        string comments;
+        review *next;
+    };
+    review* head;
+    review* tail;
+
+public:
+    Movie();
+    void setName(string n);
+    string getName();
+    void setYearReleased(string yr);
+    string getYearReleased();
+
+    ~Movie();
 };
 
 // Function declarations
@@ -48,7 +67,7 @@ int main()
     {
         cout << "Please enter a valid index. Choice --> ";
         cin >> entry;
-    }    
+    }
     // Delete selected node and output modified list
     deleteNodeByIndex(head, entry);
     cout << "Resulting list after node deletion:" << endl;
@@ -63,7 +82,7 @@ int main()
     {
         cout << "Please enter a valid index. Choice --> ";
         cin >> entry;
-    }  
+    }
     // Insert node based on user given index, and output modified list
     insertNodeAfterIndex(head, entry);
     cout << "Resulting list after insert:" << endl;
@@ -75,6 +94,15 @@ int main()
     output(head);
 
     return 0;
+}
+
+// Movie object definitions
+Movie::Movie(/* args */)
+{
+}
+
+Movie::~Movie()
+{
 }
 
 // Creates a linked list of size SIZE with random integers
