@@ -25,23 +25,23 @@ private:
         string comments;
         review *next;
     };
-    review* head;
-    review* tail;
+    review *head;
+    review *tail;
     int reviewCount = 0;
 
 public:
     Movie();
-    Movie(int, int);
+    Movie(string, int);
     void setName(string n);
     string getName();
-    void setYearReleased(string yr);
+    void setYearReleased(int yr);
     int getYearReleased();
     void addReview(string headOrTail);
     void deleteReviewByIndex(int); // Deletes Movie review at given index
-    void deleteAllReviews(); // Loops through all Movie reviews and deletes
+    void deleteAllReviews();       // Loops through all Movie reviews and deletes
     int getNumReviews();
     string reviewsToString(int); // Returns string containing given number of reviews, 0 for all
-    ~Movie(); // Deletes object, as well as all associated Movie reviews
+    ~Movie();                    // Deletes object, as well as all associated Movie reviews
 };
 
 // Function declarations
@@ -107,17 +107,32 @@ Movie::Movie()
 {
 }
 
-Movie::Movie(int, int);
-    void setName(string n);
-    string getName();
-    void setYearReleased(string yr);
-    int getYearReleased();
-    void addReview(string headOrTail);
-    void deleteReviewByIndex(int); // Deletes Movie review at given index
-    void deleteAllReviews(); // Loops through all Movie reviews and deletes
-    int getNumReviews();
-    string reviewsToString(int); // Returns string containing given number of reviews, 0 for all
-    Movie::~Movie()
+Movie::Movie(string n, int yrReleased)
+{
+    setName(n);
+    setYearReleased(yrReleased);
+}
+void Movie::setName(string n){
+    name = n;
+}
+string Movie::getName(){
+    return name;
+}
+void Movie::setYearReleased(int yr){
+    if (yr < 1887) throw invalid_argument("Must be a valid year > 1887.");
+    yearReleased = yr;
+}
+int Movie::getYearReleased(){
+    return yearReleased;
+}
+void Movie::addReview(string headOrTail);
+void Movie::deleteReviewByIndex(int); // Deletes Movie review at given index
+void Movie::deleteAllReviews();       // Loops through all Movie reviews and deletes
+int Movie::getNumReviews() {
+    return reviewCount;
+}
+string Movie::reviewsToString(int); // Returns string containing given number of reviews, 0 for all
+Movie::~Movie()
 {
 }
 
