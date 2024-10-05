@@ -102,12 +102,8 @@ int main()
     return 0;
 }
 
-// Movie object definitions
+// Movie CLASS DEFINITIONS
 Movie::Movie()
-{
-}
-
-Movie::~Movie()
 {
 }
 
@@ -121,6 +117,9 @@ Movie::Movie(int, int);
     void deleteAllReviews(); // Loops through all Movie reviews and deletes
     int getNumReviews();
     string reviewsToString(int); // Returns string containing given number of reviews, 0 for all
+    Movie::~Movie()
+{
+}
 
 // Creates a linked list of size SIZE with random integers
 void createRandomList(Node *&head, const int SIZE)
