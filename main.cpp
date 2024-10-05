@@ -47,59 +47,59 @@ public:
 };
 
 // Function declarations
-void createRandomList(Node *&, const int);
-void deleteNodeByIndex(Node *&, const int);
-void insertNodeAfterIndex(Node *&, const int);
-void deleteList(Node *&);
-void output(Node *);              // Outputs entire list to console
-bool validNodeIndex(Node *, int); // Tests whether a user given index is valid or out of bounds. In this case, [1,size of list)
-int getLinkedListSize(Node *);    // Returns the size of a linked list
+// void createRandomList(Node *&, const int);
+// void deleteNodeByIndex(Node *&, const int);
+// void insertNodeAfterIndex(Node *&, const int);
+// void deleteList(Node *&);
+// void output(Node *);              // Outputs entire list to console
+// bool validNodeIndex(Node *, int); // Tests whether a user given index is valid or out of bounds. In this case, [1,size of list)
+// int getLinkedListSize(Node *);    // Returns the size of a linked list
 
 int main()
 {
-    Node *head = nullptr;
-    const int SIZE = 7; // Changed from global variable to a local variable in main
-    int entry;          // To collect user input
+    // Node *head = nullptr;
+    // const int SIZE = 7; // Changed from global variable to a local variable in main
+    // int entry;          // To collect user input
 
-    // Create a rand() generated linked list of size SIZE with random numbers 0-99
-    createRandomList(head, SIZE);
-    cout << "Initial linked list:" << endl;
-    output(head);
+    // // Create a rand() generated linked list of size SIZE with random numbers 0-99
+    // createRandomList(head, SIZE);
+    // cout << "Initial linked list:" << endl;
+    // output(head);
 
-    // Get user input asking which node to delete, validate, delete
-    cout << "Which node to delete? " << endl;
-    output(head);
-    cout << "Choice --> ";
-    cin >> entry;
-    while (!validNodeIndex(head, entry)) // Validate user entry
-    {
-        cout << "Please enter a valid index. Choice --> ";
-        cin >> entry;
-    }
-    // Delete selected node and output modified list
-    deleteNodeByIndex(head, entry);
-    cout << "Resulting list after node deletion:" << endl;
-    output(head);
+    // // Get user input asking which node to delete, validate, delete
+    // cout << "Which node to delete? " << endl;
+    // output(head);
+    // cout << "Choice --> ";
+    // cin >> entry;
+    // while (!validNodeIndex(head, entry)) // Validate user entry
+    // {
+    //     cout << "Please enter a valid index. Choice --> ";
+    //     cin >> entry;
+    // }
+    // // Delete selected node and output modified list
+    // deleteNodeByIndex(head, entry);
+    // cout << "Resulting list after node deletion:" << endl;
+    // output(head);
 
-    // Insert a node after validating entry
-    cout << "After which node to insert 10000? " << endl;
-    output(head);
-    cout << "Choice --> ";
-    cin >> entry;
-    while (!validNodeIndex(head, entry)) // Validate user entry
-    {
-        cout << "Please enter a valid index. Choice --> ";
-        cin >> entry;
-    }
-    // Insert node based on user given index, and output modified list
-    insertNodeAfterIndex(head, entry);
-    cout << "Resulting list after insert:" << endl;
-    output(head);
+    // // Insert a node after validating entry
+    // cout << "After which node to insert 10000? " << endl;
+    // output(head);
+    // cout << "Choice --> ";
+    // cin >> entry;
+    // while (!validNodeIndex(head, entry)) // Validate user entry
+    // {
+    //     cout << "Please enter a valid index. Choice --> ";
+    //     cin >> entry;
+    // }
+    // // Insert node based on user given index, and output modified list
+    // insertNodeAfterIndex(head, entry);
+    // cout << "Resulting list after insert:" << endl;
+    // output(head);
 
-    // Delete the entire linked list and output
-    deleteList(head);
-    cout << "Resulting list after deletion:" << endl;
-    output(head);
+    // // Delete the entire linked list and output
+    // deleteList(head);
+    // cout << "Resulting list after deletion:" << endl;
+    // output(head);
 
     return 0;
 }
@@ -173,8 +173,21 @@ string Movie::getReview(int index)
     
 }
 // Deletes Movie review at given index
-void Movie::deleteReviewByIndex(int){
-    if (!head && !tail) throw illegal
+void Movie::deleteReview(int index){
+    // Make sure index is valid
+    if (!isReview) throw invalid_argument("No reviews exist for this movie.");
+
+    // Now that index is valid find review, reroute next pointer, and delete
+    // Set current pointer = to review to be deleted
+    review * current = head;
+    for (size_t i = 0; i < index; i++)
+    {
+        current = current->next;
+    }
+    
+    // If index is head, point head to next element and delete current
+    
+    
     
 }
 void Movie::deleteAllReviews();       // Loops through all Movie reviews and deletes
