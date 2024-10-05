@@ -18,7 +18,7 @@ class Movie
 private:
     string name;
     string yearReleased;
-    // Linked list node struct
+    // Linked list struct to hold Movie reviews
     struct review
     {
         double rating;
@@ -34,7 +34,8 @@ public:
     string getName();
     void setYearReleased(string yr);
     string getYearReleased();
-
+    void addReview(string headOrTail);
+    int getNumReviews();
     ~Movie();
 };
 
