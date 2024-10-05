@@ -22,7 +22,7 @@ private:
     struct review
     {
         double rating;
-        string comments;
+        string comment;
         review *next;
     };
     review *head;
@@ -169,10 +169,14 @@ string Movie::getReview(int index)
     }
 
     // Check to make sure current object is valid
-    if (current) return string("");
+    if (current) return string(to_string(current->rating) + ": " + current->comment);
     
 }
-void Movie::deleteReviewByIndex(int); // Deletes Movie review at given index
+// Deletes Movie review at given index
+void Movie::deleteReviewByIndex(int){
+    if (!head && !tail) throw illegal
+    
+}
 void Movie::deleteAllReviews();       // Loops through all Movie reviews and deletes
 int Movie::getNumReviews()
 {
