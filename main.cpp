@@ -27,7 +27,7 @@ private:
     };
     review *head;
     review *tail;
-    int reviewCount = 0;
+    int reviewCount;
 
 public:
     Movie();
@@ -106,10 +106,12 @@ int main()
 
 // Movie CLASS DEFINITIONS
 Movie::Movie()
+: reviewCount(0), head(nullptr), tail(nullptr)
 {
 }
 
 Movie::Movie(string n, int yrReleased)
+: reviewCount(0), head(nullptr), tail(nullptr)
 {
     setName(n);
     setYearReleased(yrReleased);
@@ -134,6 +136,7 @@ int Movie::getYearReleased()
 }
 void Movie::addReview(string headOrTail)
 {
+
 }
 // Returns a review at given index
 review Movie::getReview(int index)
@@ -146,10 +149,12 @@ int Movie::getNumReviews()
     return reviewCount;
 }
 // Checks if review at given index is valid
-bool isReview(int index)
+bool Movie::isReview(int index)
 {
-    if (index >= 0 && index )
+    if (index >= 0 && reviewCount > 0 && index <= reviewCount) return true;
+    return false;
 }
+
 string Movie::reviewsToString(int); // Returns string containing given number of reviews, 0 for all
 Movie::~Movie()
 {
