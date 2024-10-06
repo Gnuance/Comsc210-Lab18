@@ -173,7 +173,7 @@ string Movie::getReview(int index)
     review *current = head;
     for (size_t i = 0; i <= index && current; i++)
     {
-        current->next;
+        current = current->next;
     }
 
     // Check to make sure current object is valid
