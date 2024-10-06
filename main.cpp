@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <string>
+#include <format>
 using namespace std;
 
 // Movie object file declaration to hold info on movie and list of reviews
@@ -96,6 +97,7 @@ int main()
     // Ouput all reviews to console
     cout << "All movie reviews for movie: " << movie0.getName() << " (" << movie0.getYearReleased() << "):" << endl;
     cout << movie0.reviewsToString() << endl;
+    cout << "\t> Average: " << to_string(movie0.getReviewRatingAve()) << endl;
 
     return 0;
 }
@@ -247,14 +249,16 @@ int Movie::getNumReviews()
 // Returns average of movie ratings
 double Movie::getReviewRatingAve(){
     // Set current = head and continue looping and deleting until current == nullptr
+    double sum = 0.0;
+    int count = 0;
     review *current = head;
     while (current)
     {
-        head = head->next;
-        delete current;
-        current = head;
-        reviewCount--;
+        sum += current->rating;
+        count++;
+        current = current->next;
     }
+    return sum / count;
 }
 
 // Checks if review at given index is valid
