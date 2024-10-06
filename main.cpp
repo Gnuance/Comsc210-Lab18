@@ -59,7 +59,7 @@ int main()
 {
     string userInput = "";
     int headOrTail = -1;
-    double reviewRating = 0.0;
+    double reviewRating = -1;
     string reviewComment = "";
     Movie movie0 = Movie("Chinatown", 1974);
 
@@ -78,16 +78,16 @@ int main()
         }
         catch (const exception &e)
         {
+            headOrTail = -1; // Reset value for next try
         }
+        // Verify if string is a double AND within range
         if (headOrTail != 0 && headOrTail != 1)
             cout << "Invalid input. Please enter 0 or 1." << endl;
     } while (headOrTail != 0 && headOrTail != 1);
 
-    // Now that we have a valid option for linked list additions, prompt for review ratings
-    do
+    do // Now that we have a valid option for linked list additions, prompt for review ratings
     {
-        // Get review rating from user
-        do
+        do // Get review rating from user
         {
             cout << "Enter review rating 0-5: ";
             getline(cin, userInput);
@@ -97,11 +97,13 @@ int main()
             }
             catch (const exception &e)
             {
-                // Catch statement cannot be written as above because comparison operator < and > don't work like !=
-                cout << "Invalid input. Please enter a number between 0 and 5." << endl;
+                // String not a double. Catch statement cannot be written as above because comparison operator < and > don't work like !=
+                cout << "Invalid input." << endl;
+                reviewRating = -1; // Reset value for next try
                 continue;
             }
-            if (reviewRating < 0 || reviewRating > 5) cout << "Invalid input. Please enter a number between 0 and 5." << endl;
+            // String is a double but verify if it's in range 
+            if (reviewRating < 0 || reviewRating > 5) cout << "Invalid input." << endl;
         } while (reviewRating < 0 || reviewRating > 5);
 
         // Get review comment
