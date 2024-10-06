@@ -54,24 +54,16 @@ public:
 int main()
 {
     string userInput = "";
-    string reviewRating = "";
+    int headOrTail = -1;
+    double reviewRating = 0.0;
     string reviewComment = "";
     Movie movie0 = Movie("Chinatown", 1974);
-    int headOrTail = -1;
 
     // Phew, now that the object structure is in place, let's start working on the console ui
     // Get user input for program, either 0 or 1 for how to add new reviews to linked list
     cout << "Which linked list method should we use?" << endl;
     cout << "\t[0] Nodes added to the head." << endl;
     cout << "\t[1] Nodes added to the tail." << endl;
-    cout << "\tChoice: ";
-    // getline(cin, userInput);
-    // while (stoi(userInput) != 0 && stoi(userInput) != 1)
-    // {
-    //     cout << "Invalid option. Please enter 0 or 1: ";
-    //     getline(cin, userInput);
-    // }
-
     do
     {
         cout << "\tChoice: ";
@@ -80,21 +72,31 @@ int main()
         {
             headOrTail = stoi(userInput);
         }
-        catch(const exception& e)
+        catch (const exception &e)
         {
-            cout << "Invalid input: " << e.what() << "\nPlease try again.";
-            continue;
-        }        
+        }
+        if (headOrTail != 0 && headOrTail != 1)
+            cout << "Invalid input. Please enter 0 or 1." << endl;
     } while (headOrTail != 0 && headOrTail != 1);
-    
-
-
-    // headOrTail = stoi(userInput); // Set value of head or tail insertion
 
     // Now that we have a valid option, prompt for review ratings
     do
     {
         // Get review rating from user
+        do
+        {
+            cout << "Enter review rating 0-5: ";
+            getline(cin, userInput);
+            try
+            {
+                headOrTail = stoi(userInput);
+            }
+            catch (const exception &e)
+            {
+            }
+            if (headOrTail != 0 && headOrTail != 1) cout << "Invalid input. Please enter 0 or 1." << endl;
+        } while (/* condition */);
+
         cout << "Enter review rating 0-5: ";
         getline(cin, reviewRating);
         while (stod(reviewRating) < 0 || stod(reviewRating) > 5)
@@ -102,6 +104,7 @@ int main()
             cout << "Invalid option. Please enter a rating betwee 0 and 5: ";
             getline(cin, reviewRating);
         }
+
         // Get review comment
         cout << "Enter review comments: ";
         getline(cin, reviewComment);
@@ -267,7 +270,8 @@ int Movie::getNumReviews()
 }
 
 // Returns average of movie ratings
-double Movie::getReviewRatingAve(){
+double Movie::getReviewRatingAve()
+{
     // Set current = head and continue looping and deleting until current == nullptr
     double sum = 0.0;
     int count = 0;
@@ -296,7 +300,8 @@ string Movie::reviewsToString()
     string output = "";
     for (size_t i = 0; i < reviewCount; i++)
     {
-        if (i > 0) output += "\n";
+        if (i > 0)
+            output += "\n";
         output += "\t> " + getReview(i);
     }
     return output;
