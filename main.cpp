@@ -42,11 +42,10 @@ public:
     void deleteReview(int);  // Deletes Movie review at given index
     void deleteAllReviews(); // Loops through all Movie reviews and deletes
     int getNumReviews();
-    bool isReview(int);          // Checks if review at given index is valid
-    string reviewsToString();    // Returns string containing given number of reviews, 0 for all
-    ~Movie();                    // Deletes object, as well as all associated Movie reviews
+    bool isReview(int);       // Checks if review at given index is valid
+    string reviewsToString(); // Returns string containing given number of reviews, 0 for all
+    ~Movie();                 // Deletes object, as well as all associated Movie reviews
 };
-
 
 int main()
 {
@@ -63,7 +62,7 @@ int main()
     cout << "\t[1] Nodes added to the tail." << endl;
     cout << "\tChoice: ";
     getline(cin, userInput);
-    while (stoi(userInput) != 0 || stoi(userInput) !=1)
+    while (stoi(userInput) != 0 || stoi(userInput) != 1)
     {
         cout << "Invalid option. Please enter 0 or 1: ";
         getline(cin, userInput);
@@ -92,11 +91,10 @@ int main()
         cout << "Add another review (y/n): ";
         getline(cin, userInput);
     } while (userInput == "y" || userInput == "yes" || userInput == "Y");
-    
+
     // Ouput all reviews to console
     cout << "All movie reviews for movie: " << movie0.getName() << " (" << movie0.getYearReleased() << "):" << endl;
     cout << movie0.reviewsToString() << endl;
-    
 
     return 0;
 }
@@ -158,13 +156,15 @@ void Movie::addReview(double movRating, string movComment, int headOrTail)
     {
         // Return without performing any operation if no condition matches
         delete r;
-        return; 
+        return;
     }
     reviewCount++;
 }
 // Returns a review at given index
 string Movie::getReview(int index)
 {
+    string output = "";
+
     // Check to make sure index in in range
     if (!isReview(index))
         throw invalid_argument("Review not found at index: " + index);
@@ -178,13 +178,15 @@ string Movie::getReview(int index)
 
     // Check to make sure current object is valid
     if (current)
-        return string(to_string(current->rating) + ": " + current->comment);
+        string(to_string(current->rating) + ": " + current->comment);
+
+    return output;
 }
 // Deletes Movie review at given index
 void Movie::deleteReview(int index)
 {
     // Make sure index is valid
-    if (!isReview)
+    if (!isReview(index))
         throw invalid_argument("No reviews exist for this movie.");
 
     // Now that index is valid find review, reroute next pointer, and delete
@@ -233,7 +235,7 @@ void Movie::deleteAllReviews()
         head = head->next;
         delete current;
         current = head;
-    }    
+    }
 }
 int Movie::getNumReviews()
 {
@@ -248,7 +250,8 @@ bool Movie::isReview(int index)
 }
 
 // Returns string containing given number of reviews, 0 for all
-string Movie::reviewsToString(){
+string Movie::reviewsToString()
+{
     // Loop through all reviews and return string
     string output = "";
     for (size_t i = 0; i < reviewCount; i++)
