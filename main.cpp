@@ -98,7 +98,7 @@ int main()
     // Ouput all reviews to console
     cout << "All movie reviews for movie: " << movie0.getName() << " (" << movie0.getYearReleased() << "):" << endl;
     cout << movie0.reviewsToString() << endl;
-    cout << "\t> Average: " << to_string(movie0.getReviewRatingAve()) << endl;
+    cout << "\t> Average rating: " << fixed << setprecision(2) << movie0.getReviewRatingAve() << endl;
 
     return 0;
 }
@@ -277,7 +277,8 @@ string Movie::reviewsToString()
     string output = "";
     for (size_t i = 0; i < reviewCount; i++)
     {
-        output += "\t>" + getReview(i) + "\n";
+        if (i > 0) output += "\n";
+        output += "\t> " + getReview(i);
     }
     return output;
 }
