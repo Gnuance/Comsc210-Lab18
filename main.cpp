@@ -13,6 +13,7 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
+#include <exception>
 using namespace std;
 
 // Movie object file declaration to hold info on movie and list of reviews
@@ -56,7 +57,7 @@ int main()
     string reviewRating = "";
     string reviewComment = "";
     Movie movie0 = Movie("Chinatown", 1974);
-    int headOrTail = 0;
+    int headOrTail = -1;
 
     // Phew, now that the object structure is in place, let's start working on the console ui
     // Get user input for program, either 0 or 1 for how to add new reviews to linked list
@@ -64,13 +65,31 @@ int main()
     cout << "\t[0] Nodes added to the head." << endl;
     cout << "\t[1] Nodes added to the tail." << endl;
     cout << "\tChoice: ";
-    getline(cin, userInput);
-    while (stoi(userInput) != 0 && stoi(userInput) != 1)
+    // getline(cin, userInput);
+    // while (stoi(userInput) != 0 && stoi(userInput) != 1)
+    // {
+    //     cout << "Invalid option. Please enter 0 or 1: ";
+    //     getline(cin, userInput);
+    // }
+
+    do
     {
-        cout << "Invalid option. Please enter 0 or 1: ";
+        cout << "\tChoice: ";
         getline(cin, userInput);
-    }
-    headOrTail = stoi(userInput); // Set value of head or tail insertion
+        try
+        {
+            headOrTail = stoi(userInput);
+        }
+        catch(const exception& e)
+        {
+            cout << "Invalid input: " << e.what() << "\nPlease try again.";
+            continue;
+        }        
+    } while (headOrTail != 0 && headOrTail != 1);
+    
+
+
+    // headOrTail = stoi(userInput); // Set value of head or tail insertion
 
     // Now that we have a valid option, prompt for review ratings
     do
