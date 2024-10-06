@@ -204,22 +204,24 @@ void Movie::deleteReview(int index)
     // If current is head, point head to next element and delete current
     // If current is tail, point tail to prev element and delete current
     // Else, point prev = current->next, and delete current
-    if (current == head)
+    if (current == head && current == tail)
+    {
+        head = tail = nullptr;
+    }    
+    else if (current == head)
     {
         head = head->next;
-        delete current;
     }
     else if (current == tail)
     {
         tail = prev;
-        delete current;
         tail->next = nullptr;
     }
     else
     {
         prev->next = current->next;
-        delete current;
     }
+    delete current;
 }
 // Loops through all Movie reviews and deletes
 void Movie::deleteAllReviews()
@@ -233,6 +235,8 @@ void Movie::deleteAllReviews()
         current = head;
         reviewCount--;
     }
+    // Reset head/tail pointers
+    head = tail = nullptr;
 }
 int Movie::getNumReviews()
 {
