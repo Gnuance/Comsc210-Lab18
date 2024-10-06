@@ -97,9 +97,11 @@ int main()
             }
             catch (const exception &e)
             {
-            }
-            if (reviewRating < 0 || reviewRating > 5)
+                // Catch statement cannot be written as above because comparison operator < and > don't work like !=
                 cout << "Invalid input. Please enter a number between 0 and 5." << endl;
+                continue;
+            }
+            if (reviewRating < 0 || reviewRating > 5) cout << "Invalid input. Please enter a number between 0 and 5." << endl;
         } while (reviewRating < 0 || reviewRating > 5);
 
         // Get review comment
