@@ -10,8 +10,9 @@
 */
 
 #include <iostream>
+#include <iomanip>
 #include <string>
-#include <format>
+#include <sstream>
 using namespace std;
 
 // Movie object file declaration to hold info on movie and list of reviews
@@ -171,15 +172,15 @@ string Movie::getReview(int index)
         throw invalid_argument("Review not found at index: " + index);
 
     // Set current pointer equal to review object
-    string output = "";
+    stringstream output;
     review *current = head;
     for (size_t i = 0; i < index; i++)
     {
         current = current->next;
     }
-    output = string(to_string(current->rating) + ": " + current->comment);
+    output << fixed << setprecision(2) << current->rating << ": " << current->comment;
 
-    return output;
+    return output.str();
 }
 // Deletes Movie review at given index
 void Movie::deleteReview(int index)
@@ -276,7 +277,7 @@ string Movie::reviewsToString()
     string output = "";
     for (size_t i = 0; i < reviewCount; i++)
     {
-        output += getReview(i) + "\n";
+        output += "\t>" + getReview(i) + "\n";
     }
     return output;
 }
