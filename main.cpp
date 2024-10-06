@@ -163,22 +163,18 @@ void Movie::addReview(double movRating, string movComment, int headOrTail)
 // Returns a review at given index
 string Movie::getReview(int index)
 {
-    string output = "";
-
     // Check to make sure index in in range
     if (!isReview(index))
         throw invalid_argument("Review not found at index: " + index);
 
     // Set current pointer equal to review object
+    string output = "";
     review *current = head;
-    for (size_t i = 0; i <= index && current; i++)
+    for (size_t i = 0; i < index; i++)
     {
+        string(to_string(current->rating) + ": " + current->comment);
         current = current->next;
     }
-
-    // Check to make sure current object is valid
-    if (current)
-        string(to_string(current->rating) + ": " + current->comment);
 
     return output;
 }
