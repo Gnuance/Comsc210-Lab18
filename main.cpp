@@ -33,11 +33,11 @@ private:
 public:
     Movie();
     Movie(string, int);
-    void setName(string n);
+    void setName(string);
     string getName();
-    void setYearReleased(int yr);
+    void setYearReleased(int);
     int getYearReleased();
-    void addReview(double, string, string);
+    void addReview(double, string, int);
     string getReview(int);   // Returns a review at given index
     void deleteReview(int);  // Deletes Movie review at given index
     void deleteAllReviews(); // Loops through all Movie reviews and deletes
@@ -53,7 +53,7 @@ int main()
     string userInput = "";
     string reviewRating = "";
     string reviewComment = "";
-    Movie
+    Movie movie0 = Movie("Chinatow", 1974);
 
     // Phew, now that the object structure is in place, let's start working on the console ui
     // Get user input for program, either 0 or 1 for how to add new reviews to linked list
@@ -123,28 +123,34 @@ int Movie::getYearReleased()
 {
     return yearReleased;
 }
-void Movie::addReview(double movRating, string movComment, string headOrTail)
+void Movie::addReview(double movRating, string movComment, int headOrTail)
 {
+    // Create new object to add to reviews
+    review *r = new review;
+    r->rating = movRating;
+    r->comment = movComment;
     // If head and tail are null, initialize list
     if (!head && !tail)
     {
-        head = tail = &r;
+        head = tail = r;
         tail->next = nullptr;
     }
-    else if (headOrTail == "head") // Place new node at head
+    else if (headOrTail == 0) // Place new node at head
     {
-        r.next = head->next;
-        head = &r;
+        r->next = head->next;
+        head = r;
     }
-    else if (headOrTail == "tail") // Place new node at tail
+    else if (headOrTail == 1) // Place new node at tail
     {
-        tail->next = &r;
-        tail = &r;
+        tail->next = r;
+        tail = r;
         tail->next = nullptr;
     }
     else
     {
-        return; // Return without performing any operation if no condition matches
+        // Return without performing any operation if no condition matches
+        delete r;
+        return; 
     }
     reviewCount++;
 }
