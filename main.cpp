@@ -10,6 +10,7 @@
 */
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 // Movie object file declaration to hold info on movie and list of reviews
@@ -49,7 +50,26 @@ public:
 
 int main()
 {
-    
+    string userInput = "";
+
+    // Phew, now that the object structure is in place, let's start working on the console ui
+    // Get user input for program, either 0 or 1 for how to add new reviews to linked list
+    cout << "Which linked list method should we use?" << endl;
+    cout << "\t[0] Nodes added to the head." << endl;
+    cout << "\t[1] Nodes added to the tail." << endl;
+    cout << "\tChoice: ";
+    getline(cin, userInput);
+    while (stoi(userInput) != 0 || stoi(userInput) !=1)
+    {
+        cout << "Invalid option. Please enter 0 or 1: " << endl;
+        getline(cin, userInput);
+    }
+
+    // Now that we have a valid option, prompt for review ratings
+    do
+    {
+        
+    } while (userInput == "y" || userInput == "yes" || userInput == "Y");
     
 
     return 0;
