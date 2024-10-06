@@ -6,7 +6,11 @@
     2. Going to create a class for movie to hold the movie object to make the code more maintainable overall.
     3. For adding to head or tail, it could be implemented as separate functions or one function with an if statement.
         Not sure which is better overall.
-    4. Seems straightforward overall.
+    4. Also decided early on, just based on OOP principles that because reviews essentially belonged to the movies they referred to,
+        that reviews should be a subclass/struct within the Movie objects themselves.
+    5. Added try catch statements to handle stoi and stod. If I had more time to spend on this project, I'd eventually deal with conversion
+        from string to int/double and validation in their own functions, but try/catch is quick, dirty and gets the job done for a small
+        program like this. Spent too much time on this already.
 */
 
 #include <iostream>
@@ -79,7 +83,7 @@ int main()
             cout << "Invalid input. Please enter 0 or 1." << endl;
     } while (headOrTail != 0 && headOrTail != 1);
 
-    // Now that we have a valid option, prompt for review ratings
+    // Now that we have a valid option for linked list additions, prompt for review ratings
     do
     {
         // Get review rating from user
@@ -89,28 +93,21 @@ int main()
             getline(cin, userInput);
             try
             {
-                headOrTail = stoi(userInput);
+                reviewRating = stod(userInput);
             }
             catch (const exception &e)
             {
             }
-            if (headOrTail != 0 && headOrTail != 1) cout << "Invalid input. Please enter 0 or 1." << endl;
-        } while (/* condition */);
-
-        cout << "Enter review rating 0-5: ";
-        getline(cin, reviewRating);
-        while (stod(reviewRating) < 0 || stod(reviewRating) > 5)
-        {
-            cout << "Invalid option. Please enter a rating betwee 0 and 5: ";
-            getline(cin, reviewRating);
-        }
+            if (reviewRating < 0 || reviewRating > 5)
+                cout << "Invalid input. Please enter a number between 0 and 5." << endl;
+        } while (reviewRating < 0 || reviewRating > 5);
 
         // Get review comment
         cout << "Enter review comments: ";
         getline(cin, reviewComment);
 
         // We have rating and comment, now add to Movie object review
-        movie0.addReview(stod(reviewRating), reviewComment, headOrTail);
+        movie0.addReview(reviewRating, reviewComment, headOrTail);
 
         // Ask if user wanna do it again
         cout << "Add another review (y/n): ";
