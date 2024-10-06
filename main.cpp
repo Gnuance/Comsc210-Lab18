@@ -172,9 +172,9 @@ string Movie::getReview(int index)
     review *current = head;
     for (size_t i = 0; i < index; i++)
     {
-        string(to_string(current->rating) + ": " + current->comment);
         current = current->next;
     }
+    output = string(to_string(current->rating) + ": " + current->comment);
 
     return output;
 }
@@ -231,6 +231,7 @@ void Movie::deleteAllReviews()
         head = head->next;
         delete current;
         current = head;
+        reviewCount--;
     }
 }
 int Movie::getNumReviews()
@@ -240,7 +241,7 @@ int Movie::getNumReviews()
 // Checks if review at given index is valid
 bool Movie::isReview(int index)
 {
-    if (index >= 0 && reviewCount > 0 && index <= reviewCount)
+    if (index >= 0 && reviewCount > 0 && index < reviewCount)
         return true;
     return false;
 }
