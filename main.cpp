@@ -53,7 +53,8 @@ int main()
     string userInput = "";
     string reviewRating = "";
     string reviewComment = "";
-    Movie movie0 = Movie("Chinatow", 1974);
+    Movie movie0 = Movie("Chinatown", 1974);
+    int headOrTail = 0;
 
     // Phew, now that the object structure is in place, let's start working on the console ui
     // Get user input for program, either 0 or 1 for how to add new reviews to linked list
@@ -67,6 +68,7 @@ int main()
         cout << "Invalid option. Please enter 0 or 1: ";
         getline(cin, userInput);
     }
+    headOrTail = stoi(userInput); // Set value of head or tail insertion
 
     // Now that we have a valid option, prompt for review ratings
     do
@@ -77,17 +79,23 @@ int main()
         while (stod(reviewRating) < 0 || stod(reviewRating) > 5)
         {
             cout << "Invalid option. Please enter a rating betwee 0 and 5: ";
-            getline(cin, userInput);
+            getline(cin, reviewRating);
         }
         // Get review comment
         cout << "Enter review comments: ";
         getline(cin, reviewComment);
 
         // We have rating and comment, now add to Movie object review
+        movie0.addReview(stod(reviewRating), reviewComment, headOrTail);
 
-        
-
+        // Ask if user wanna do it again
+        cout << "Add another review (y/n): ";
+        getline(cin, userInput);
     } while (userInput == "y" || userInput == "yes" || userInput == "Y");
+    
+    // Ouput all reviews to console
+    cout << "All movie reviews for movie: " << movie0.getName() << " (" << movie0.getYearReleased() << "):" << endl;
+    cout << movie0.reviewsToString() << endl;
     
 
     return 0;
