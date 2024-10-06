@@ -42,7 +42,7 @@ public:
     void deleteAllReviews(); // Loops through all Movie reviews and deletes
     int getNumReviews();
     bool isReview(int);          // Checks if review at given index is valid
-    string reviewsToString(int); // Returns string containing given number of reviews, 0 for all
+    string reviewsToString();    // Returns string containing given number of reviews, 0 for all
     ~Movie();                    // Deletes object, as well as all associated Movie reviews
 };
 
@@ -220,7 +220,6 @@ void Movie::deleteReview(int index)
         delete current;
     }
 }
-
 // Loops through all Movie reviews and deletes
 void Movie::deleteAllReviews()
 {
@@ -228,7 +227,9 @@ void Movie::deleteAllReviews()
     review *current = head;
     while (current)
     {
-        
+        head = head->next;
+        delete current;
+        current = head;
     }    
 }
 int Movie::getNumReviews()
@@ -243,7 +244,18 @@ bool Movie::isReview(int index)
     return false;
 }
 
-string Movie::reviewsToString(int); // Returns string containing given number of reviews, 0 for all
+// Returns string containing given number of reviews, 0 for all
+string Movie::reviewsToString(){
+    // Loop through all reviews and return string
+    for (size_t i = 0; i < reviewCount; i++)
+    {
+        /* code */
+    }
+    
+
+}
+
+
 Movie::~Movie()
 {
 }
