@@ -37,7 +37,7 @@ public:
     string getName();
     void setYearReleased(int yr);
     int getYearReleased();
-    void addReview(review, string);
+    void addReview(double, string, string);
     string getReview(int);   // Returns a review at given index
     void deleteReview(int);  // Deletes Movie review at given index
     void deleteAllReviews(); // Loops through all Movie reviews and deletes
@@ -51,6 +51,9 @@ public:
 int main()
 {
     string userInput = "";
+    string reviewRating = "";
+    string reviewComment = "";
+    Movie
 
     // Phew, now that the object structure is in place, let's start working on the console ui
     // Get user input for program, either 0 or 1 for how to add new reviews to linked list
@@ -61,14 +64,29 @@ int main()
     getline(cin, userInput);
     while (stoi(userInput) != 0 || stoi(userInput) !=1)
     {
-        cout << "Invalid option. Please enter 0 or 1: " << endl;
+        cout << "Invalid option. Please enter 0 or 1: ";
         getline(cin, userInput);
     }
 
     // Now that we have a valid option, prompt for review ratings
     do
     {
+        // Get review rating from user
+        cout << "Enter review rating 0-5: ";
+        getline(cin, reviewRating);
+        while (stod(reviewRating) < 0 || stod(reviewRating) > 5)
+        {
+            cout << "Invalid option. Please enter a rating betwee 0 and 5: ";
+            getline(cin, userInput);
+        }
+        // Get review comment
+        cout << "Enter review comments: ";
+        getline(cin, reviewComment);
+
+        // We have rating and comment, now add to Movie object review
+
         
+
     } while (userInput == "y" || userInput == "yes" || userInput == "Y");
     
 
@@ -105,7 +123,7 @@ int Movie::getYearReleased()
 {
     return yearReleased;
 }
-void Movie::addReview(review r, string headOrTail)
+void Movie::addReview(double movRating, string movComment, string headOrTail)
 {
     // If head and tail are null, initialize list
     if (!head && !tail)
