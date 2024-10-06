@@ -62,7 +62,7 @@ int main()
     cout << "\t[1] Nodes added to the tail." << endl;
     cout << "\tChoice: ";
     getline(cin, userInput);
-    while (stoi(userInput) != 0 || stoi(userInput) != 1)
+    while (stoi(userInput) != 0 && stoi(userInput) != 1)
     {
         cout << "Invalid option. Please enter 0 or 1: ";
         getline(cin, userInput);
