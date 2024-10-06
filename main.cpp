@@ -42,9 +42,10 @@ public:
     void deleteReview(int);  // Deletes Movie review at given index
     void deleteAllReviews(); // Loops through all Movie reviews and deletes
     int getNumReviews();
-    bool isReview(int);       // Checks if review at given index is valid
-    string reviewsToString(); // Returns string containing given number of reviews, 0 for all
-    ~Movie();                 // Deletes object, as well as all associated Movie reviews
+    double getReviewRatingAve(); // Returns average rating for movie
+    bool isReview(int);          // Checks if review at given index is valid
+    string reviewsToString();    // Returns string containing given number of reviews, 0 for all
+    ~Movie();                    // Deletes object, as well as all associated Movie reviews
 };
 
 int main()
@@ -143,7 +144,7 @@ void Movie::addReview(double movRating, string movComment, int headOrTail)
     }
     else if (headOrTail == 0) // Place new node at head
     {
-        r->next = head->next;
+        r->next = head;
         head = r;
     }
     else if (headOrTail == 1) // Place new node at tail
@@ -207,7 +208,7 @@ void Movie::deleteReview(int index)
     if (current == head && current == tail)
     {
         head = tail = nullptr;
-    }    
+    }
     else if (current == head)
     {
         head = head->next;
@@ -242,6 +243,20 @@ int Movie::getNumReviews()
 {
     return reviewCount;
 }
+
+// Returns average of movie ratings
+double Movie::getReviewRatingAve(){
+    // Set current = head and continue looping and deleting until current == nullptr
+    review *current = head;
+    while (current)
+    {
+        head = head->next;
+        delete current;
+        current = head;
+        reviewCount--;
+    }
+}
+
 // Checks if review at given index is valid
 bool Movie::isReview(int index)
 {
